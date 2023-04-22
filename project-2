@@ -1,0 +1,20 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t praveenpukkala/project-2:v1 .'
+            }
+        }
+        stage('Push Docker Image to Docker Hub') {
+            steps {
+                sh 'docker push praveenpukkala/project-2:v1'
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                sh 'docker run -d -p 80:80 praveenpukkala/project-2:v1'
+            }
+        }
+    }
+}
